@@ -45,7 +45,7 @@
             <h1>Una Nueva Aventura</h1>
             <p>Hoy queremos hacerles un regalo un poco especial, algo que viene directamente desde nuestro cariño para acompañar los hermosos recuerdos que están por crear. Dos almas tan increíbles merecen conservar cada instante para siempre.</p>
         </div>
-        <button class="btn-canam" onclick="nextScreen(2)"><img src="canam.png" alt="Canam"><p style="font-size:0.8rem; color:#b38f4f;">Presiónanos para comenzar esta aventura</p></button>
+        <button class="btn-canam" onclick="nextScreen(2)"><img src="canam.png" alt="Canam"><p style="font-size:0.8rem; color:#b38f4f;">Sigamos la ruta!</p></button>
     </div>
 
     <!-- PANTALLA 3: Rumbo al misterio -->
@@ -54,7 +54,7 @@
             <h1>El Camino Juntos</h1>
             <p>A lo largo de la vida, cada kilómetro recorrido se vuelve más hermoso si tienes a la persona correcta al lado. Su complicidad es una inspiración para todos los que los rodeamos, y es por esto que les queremos regalar...</p>
         </div>
-        <button class="btn-canam" onclick="nextScreen(3)"><img src="canam.png" alt="Canam"><p style="font-size:0.8rem; color:#b38f4f;">¡Avanzar!</p></button>
+        <button class="btn-canam" onclick="nextScreen(3)"><img src="canam.png" alt="Canam"><p style="font-size:0.8rem; color:#b38f4f;">¡Pisale Pisale!</p></button>
     </div>
 
     <!-- PANTALLA 4: El juego de adivinar -->
@@ -64,11 +64,11 @@
             <p>El amor también tiene un tantito de misterio. Para descubrir su sorpresa, primero deben adivinar cuál es la caja correcta de las 5. ¡Elijan con el corazón!</p>
         </div>
         <div class="game-container">
-            <div class="game-box" onclick="wrongBox('¡Cerca pero no! Esta caja solo tiene polvo y buenos deseos.')"><img src="caja1.png"></div>
-            <div class="game-box" onclick="wrongBox('¡Nop! Aquí guardamos los calcetines perdidos de Fabián.')"><img src="caja2.png"></div>
+            <div class="game-box" onclick="wrongBox('¡Cerca pero no! Esta caja tiene unos cables masticados, de donde serán?.')"><img src="caja1.png"></div>
+            <div class="game-box" onclick="wrongBox('¡Nop! Aquí guardamos los pañales usados de la megan.')"><img src="caja2.png"></div>
             <div class="game-box" onclick="correctBox()"><img src="caja3.png"></div> <!-- Esta es la correcta -->
-            <div class="game-box" onclick="wrongBox('¡Casi! Pero esta caja está vacía como tu billetera después de la fiesta.')"><img src="caja4.png"></div>
-            <div class="game-box" onclick="wrongBox('¡Error! Aquí solo hay un vale por un fuerte abrazo virtual.')"><img src="caja5.png"></div>
+            <div class="game-box" onclick="wrongBox('¡Casi! Pero aqui solo hay arena que soltó el buggy.')"><img src="caja4.png"></div>
+            <div class="game-box" onclick="wrongBox('¡Error! Aquí había algo pero se lo llevó el Jack.')"><img src="caja5.png"></div>
         </div>
         <p id="game-msg" style="margin-top: 15px; color: #b32f2f; font-weight: bold; min-height: 24px;"></p>
     </div>
