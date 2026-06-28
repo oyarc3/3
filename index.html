@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Fabián y Elisa</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Georgia', serif; }
+        body { background: #fffcf9; color: #4a3b32; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
+        .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; opacity: 0; pointer-events: none; transition: opacity 0.8s ease; }
+        .active { opacity: 1; pointer-events: auto; }
+        .box-text { background: rgba(255, 255, 255, 0.95); border: 2px solid #d4af37; padding: 30px; border-radius: 15px; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 40px; }
+        h1 { font-size: 2.2rem; color: #b38f4f; margin-bottom: 20px; font-weight: normal; }
+        p { font-size: 1.1rem; line-height: 1.8; color: #5a4a42; }
+        .btn-canam { background: none; border: none; cursor: pointer; width: 120px; transition: transform 0.3s; position: relative; }
+        .btn-canam img { width: 100%; height: auto; }
+        .drive-animation { animation: driveAway 1s forwards ease-in-out; }
+        @keyframes driveAway { 0% { transform: scale(1) translateX(0); } 50% { transform: scale(1.1); } 100% { transform: scale(0) translateX(300px); opacity: 0; } }
+        .game-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; max-width: 600px; margin-top: 20px; }
+        .game-box { width: 90px; cursor: pointer; transition: transform 0.2s; }
+        .game-box:hover { transform: scale(1.05); }
+        .game-box img { width: 100%; }
+        .nesting-box { cursor: pointer; transition: transform 0.5s ease; max-width: 250px; }
+        .nesting-box img { width: 100%; height: auto; }
+        .shrink { transform: scale(0.4); opacity: 0; }
+        .final-img { max-width: 100%; max-height: 60vh; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" src="musica.mp3" loop></audio>
+
+    <!-- PANTALLA 1: Bienvenida -->
+    <div class="screen active" id="s1">
+        <div class="box-text">
+            <h1>Fabián y Elisa</h1>
+            <p>Hay historias de amor que se escriben en voz baja, pero la de ustedes brilla con luz propia. El amor verdadero no es solo encontrarse, es decidir caminar juntos el mismo sendero, compartiendo risas, superando retos y construyendo un hogar en el corazón del otro.</p>
+        </div>
+        <button class="btn-canam" onclick="nextScreen(1)"><img src="canam.png" alt="Canam"><p style="font-size:0.8rem; color:#b38f4f; font-weight:bold;">¡PRESIONA AQUÍ!</p></button>
+    </div>
+
+    <!-- PANTALLA 2: La invitación a la aventura -->
+    <div class="screen" id="s2">
+        <div class="box-text">
+            <h1>Una Nueva Aventura</h1>
+            <p>Hoy queremos hacerles un regalo un poco especial, algo que viene directamente desde nuestro cariño para acompañar los hermosos recuerdos que están por crear. Dos almas tan increíbles merecen conservar cada instante para siempre.</p>
+        </div>
+        <button class="btn-canam" onclick="nextScreen(2)"><img src="canam.png" alt="Canam"><p style="font-size:0.8rem; color:#b38f4f;">Presiónanos para comenzar esta aventura</p></button>
+    </div>
+
+    <!-- PANTALLA 3: Rumbo al misterio -->
+    <div class="screen" id="s3">
+        <div class="box-text">
+            <h1>El Camino Juntos</h1>
+            <p>A lo largo de la vida, cada kilómetro recorrido se vuelve más hermoso si tienes a la persona correcta al lado. Su complicidad es una inspiración para todos los que los rodeamos, y es por esto que les queremos regalar...</p>
+        </div>
+        <button class="btn-canam" onclick="nextScreen(3)"><img src="canam.png" alt="Canam"><p style="font-size:0.8rem; color:#b38f4f;">¡Avanzar!</p></button>
+    </div>
+
+    <!-- PANTALLA 4: El juego de adivinar -->
+    <div class="screen" id="s4">
+        <div class="box-text">
+            <h1>¿Qué tan listos están?</h1>
+            <p>El amor también tiene espacio para las risas y los juegos. Para descubrir su sorpresa, primero deben adivinar cuál es la caja correcta de las 5. ¡Elijan con el corazón (y un poquito de suerte)!</p>
+        </div>
+        <div class="game-container">
+            <div class="game-box" onclick="wrongBox('¡Cerca pero no! Esta caja solo tiene polvo y buenos deseos.')"><img src="caja1.png"></div>
+            <div class="game-box" onclick="wrongBox('¡Nop! Aquí guardamos los calcetines perdidos de Fabián.')"><img src="caja2.png"></div>
+            <div class="game-box" onclick="correctBox()"><img src="caja3.png"></div> <!-- Esta es la correcta -->
+            <div class="game-box" onclick="wrongBox('¡Casi! Pero esta caja está vacía como tu billetera después de la fiesta.')"><img src="caja4.png"></div>
+            <div class="game-box" onclick="wrongBox('¡Error! Aquí solo hay un vale por un fuerte abrazo virtual.')"><img src="caja5.png"></div>
+        </div>
+        <p id="game-msg" style="margin-top: 15px; color: #b32f2f; font-weight: bold; min-height: 24px;"></p>
+    </div>
+
+    <!-- PANTALLAS DE LAS CAJAS ANIDADAS (5 NIVELES DE CAJAS) -->
+    <div class="screen" id="s5">
+        <div class="box-text">
+            <h1>¡La encontraste! Pero espera...</h1>
+            <p>¡Vaya ojo que tienen! Romántico pero con misterio. Aquí está la caja grande, pero parece que hay algo más adentro. Presiónala para ver qué esconde.</p>
+        </div>
+        <div class="nesting-box" onclick="shrinkBox(5)"><img src="caja1.png"></div>
+    </div>
+
+    <div class="screen" id="s6">
+        <div class="box-text">
+            <h1>¿Otra caja?</h1>
+            <p>El amor es como una cebolla, tiene capas y capas de sorpresas (y a veces te hace llorar de felicidad). ¡Toca la caja de nuevo!</p>
+        </div>
+        <div class="nesting-box" onclick="shrinkBox(6)"><img src="caja2.png"></div>
+    </div>
+
+    <div class="screen" id="s7">
+        <div class="box-text">
+            <h1>Esto ya parece un chiste...</h1>
+            <p>Prometemos que no es una broma infinita. Las cosas buenas de la vida toman su tiempo y requieren un poquito de paciencia. ¡Dale otra vez!</p>
+        </div>
+        <div class="nesting-box" onclick="shrinkBox(7)"><img src="caja3.png"></div>
+    </div>
+
+    <div class="screen" id="s8">
+        <div class="box-text">
+            <h1>Ya casi llegamos...</h1>
+            <p>¡Se está volviendo diminuta! La emoción aumenta y el gran misterio está a punto de ser revelado. ¿Están listos para el gran momento?</p>
+        </div>
+        <div class="nesting-box" onclick="shrinkBox(8)"><img src="caja4.png"></div>
+    </div>
+
+    <div class="screen" id="s9">
+        <div class="box-text">
+            <h1>¡La última y nos fuimos!</h1>
+            <p>Esta es la caja más pequeñita de todas. Denle el último toque mágico con todo su amor para romper el envoltorio final.</p>
+        </div>
+        <div class="nesting-box" onclick="shrinkBox(9)"><img src="caja5.png"></div>
+    </div>
+
+    <!-- PANTALLA FINAL: El Regalo -->
+    <div class="screen" id="s10">
+        <div class="box-text" style="margin-bottom:15px; padding:20px;">
+            <h1>¡Sorpresa! Con mucho amor</h1>
+            <p>Porque capturar los instantes mágicos es la mejor forma de congelar el tiempo. Esperamos que disfruten muchísimo esta experiencia. ¡Los queremos!</p>
+        </div>
+        <img src="regalo.png" alt="Su Regalo" class="final-img">
+    </div>
+
+    <script>
+        // Intenta reproducir la música
+        function playMusic() {
+            const music = document.getElementById('bg-music');
+            music.play().catch(e => console.log("Esperando interacción para audio"));
+        }
+
+        function nextScreen(currentId) {
+            playMusic(); // Activa música al primer clic
+            const currentScreen = document.getElementById('s' + currentId);
+            const nextScreen = document.getElementById('s' + (currentId + 1));
+            
+            // Animación del Canam
+            const btn = currentScreen.querySelector('.btn-canam');
+            if(btn) {
+                btn.classList.add('drive-animation');
+            }
+
+            setTimeout(() => {
+                currentScreen.classList.remove('active');
+                nextScreen.classList.add('active');
+            }, 800);
+        }
+
+        function wrongBox(message) {
+            document.getElementById('game-msg').innerText = message;
+        }
+
+        function correctBox() {
+            playMusic();
+            document.getElementById('s4').classList.remove('active');
+            document.getElementById('s5').classList.add('active');
+        }
+
+        function shrinkBox(currentId) {
+            const currentScreen = document.getElementById('s' + currentId);
+            const nextScreen = document.getElementById('s' + (currentId + 1));
+            const box = currentScreen.querySelector('.nesting-box');
+            
+            box.classList.add('shrink');
+
+            setTimeout(() => {
+                currentScreen.classList.remove('active');
+                nextScreen.classList.add('active');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
